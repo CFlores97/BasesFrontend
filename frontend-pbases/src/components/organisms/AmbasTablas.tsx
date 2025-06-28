@@ -1,7 +1,6 @@
 import { Tabla } from '../molecules/Tabla';
 
 type TablaConfig = {
-    headers: string[];
     rows: Record<string, any>[];
 };
 
@@ -10,19 +9,17 @@ type AmbasTablasProps = {
     oracle: TablaConfig;
 };
 
-const mockmysql: TablaConfig = {
-  headers: ["ID", "Nombre", "Edad"],
+const mockmysql = {
   rows: [
-    { ID: 1, Nombre: "Carmen", Edad: 25 },
-    { ID: 2, Nombre: "Luis", Edad: 30 },
+    { id: 1, nombre: "Carmen", edad: 25 },
+    { id: 2, nombre: "Luis", edad: 30 },
   ],
 };
 
-const mockoracle: TablaConfig = {
-  headers: ["ID", "Nombre", "Ciudad"],
+const mockoracle = {
   rows: [
-    { ID: 1, Nombre: "Mendoza", Ciudad: "Tegucigalpa" },
-    { ID: 2, Nombre: "Ramírez", Ciudad: "San Pedro Sula" },
+    { id: 1, nombre: "Mendoza", ciudad: "Tegucigalpa" },
+    { id: 2, nombre: "Ramírez", ciudad: "San Pedro Sula" },
   ],
 };
 
@@ -31,17 +28,18 @@ const replicar = () => {
   };
 
 export const AmbasTablas = ({ mysql, oracle }: AmbasTablasProps) => (
-    <div className="d-flex gap-4 flex-wrap">
+    <div className="d-flex gap-4 flex-wrap justify-content-center text-center">
         <div>
             <h6>MySQL</h6>
-            <Tabla headers={mysql.headers} rows={mysql.rows} />
+            <Tabla rows={mysql.rows} />
         </div>
         <div className="d-flex flex-column justify-content-center my-4">
-            <button className="btn btn-primary" style={{ marginBottom: "1.5rem" }}  onClick={replicar}> Replicar Tabla </button>
+            <button className="btn btn-primary" style={{ marginBottom: "1.5rem" }}  onClick={replicar}> Replicar a MYSQL </button>
+            <button className="btn btn-primary" style={{ marginBottom: "1.5rem" }}  onClick={replicar}> Replicar a ORACLE </button>
         </div>
         <div>
             <h6>Oracle</h6>
-            <Tabla headers={oracle.headers} rows={oracle.rows} />
+            <Tabla rows={oracle.rows} />
         </div>
     </div>
 );

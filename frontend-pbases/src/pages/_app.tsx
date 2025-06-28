@@ -20,20 +20,20 @@ const opciones = [
 export default function App({ Component, pageProps }: AppProps) {
   const [opcion, setOpcion] = useState<string>(opciones[0].value);
   const [config, setConfig] = useState({
-    mysql: { headers: [], rows: [] },
-    oracle: { headers: [], rows: [] }
+    mysql: { rows: [] },
+    oracle: { rows: [] }
   });
 
   useEffect(() => {
     const getDatos = async () => {
       const [resMysql, resOracle] = await Promise.all([
-        fetch(`/api/mysql/${opcion}`).then(r => r.json()),
-        fetch(`/api/oracle/${opcion}`).then(r => r.json())
+        fetch(`/list/mysql/${opcion}`).then(r => r.json()),
+        fetch(`/list/oracle/${opcion}`).then(r => r.json())
       ]);
 
       setConfig({
-        mysql: { headers: resMysql.headers, rows: resMysql.data },
-        oracle: { headers: resOracle.headers, rows: resOracle.data }
+        mysql: { rows: resMysql.data },
+        oracle: { rows: resOracle.data }
       });
     };
 
